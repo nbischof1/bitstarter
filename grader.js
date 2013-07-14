@@ -24,9 +24,15 @@ References:
 var fs = require('fs');
 var program = require('commander');
 var cheerio = require('cheerio');
+var rest = require('restler');
+var util = require('util');
+
 var HTMLFILE_DEFAULT = "index.html";
 var CHECKSFILE_DEFAULT = "checks.json";
 
+var getContentFromURL = function(url) {
+    rest.get(url).on('complete', thinaboutagain);
+}
 var assertFileExists = function(infile) {
     var instr = infile.toString();
     if(!fs.existsSync(instr)) {
@@ -36,8 +42,8 @@ var assertFileExists = function(infile) {
     return instr;
 };
 
-var cheerioHtmlFile = function(htmlfile) {
-    return cheerio.load(fs.readFileSync(htmlfile));
+var cheerioHtmlFile = function(content) {
+    return cheerio.load(content);
 };
 
 var loadChecks = function(checksfile) {
@@ -45,15 +51,27 @@ var loadChecks = function(checksfile) {
 };
 
 var checkHtmlFile = function(htmlfile, checksfile) {
-    $ = cheerioHtmlFile(htmlfile);
+    $ = cheerioHtmlFile(fs.readFileSync(htmlfile));
+    return checkHtmlContent($, checksfile);
+};
+
+// --- shared functions, used by file and URL based grading --------------------
+var checkHtmlContent = function(htmlcontent, checksfile) {
+    var htmlFile = cheerioHtmlFile(htmlcontent);
     var checks = loadChecks(checksfile).sort();
     var out = {};
     for(var ii in checks) {
-        var present = $(checks[ii]).length > 0;
+        var present = htmlFile(checks[ii]).length > 0;
         out[checks[ii]] = present;
     }
     return out;
 };
+
+var doGrading = function(checkedContent) {
+    var outJson = JSON.stringify(checkedContent, null, 4);
+    console.log(outJson);
+};
+// -----------------------------------------------------------------------------
 
 var clone = function(fn) {
     // Workaround for commander.js issue.
@@ -61,14 +79,38 @@ var clone = function(fn) {
     return fn.bind({});
 };
 
+var gradeFromFile = function(prog) {
+    var checkJson = checkHtmlFile(prog.file, prog.checks);
+    doGrading(checkJson);
+}
+
+var gradeFromURL = function(prog) {
+    console.log('grading from URL: ' + prog.url);
+    rest.get(prog.url).on('complete', function(result,response) {
+	if (result instanceof Error) {
+	    //  console.error('Error: ' + util.format(response.message));
+            console.error('Error: ' + util.format(result.message));
+	    // this.retry(5000); // try again after 5 sec
+	} else {
+    console.log('reeived characters: ' + result.length);
+	    var checkJson = checkHtmlContent(result, prog.checks);
+	    doGrading(checkJson);
+	}
+    });
+}
+
 if(require.main == module) {
     program
         .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
-        .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
+        .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists))
+        .option('-u, --url <url>', 'URL to content to be checked')
         .parse(process.argv);
-    var checkJson = checkHtmlFile(program.file, program.checks);
-    var outJson = JSON.stringify(checkJson, null, 4);
-    console.log(outJson);
+    if(program.file) {
+	gradeFromFile(program);
+    }
+    if(program.url) {
+	gradeFromURL(program);
+    }
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }

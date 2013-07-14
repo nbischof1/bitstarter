@@ -51,7 +51,7 @@ var loadChecks = function(checksfile) {
 };
 
 var checkHtmlFile = function(htmlfile, checksfile) {
-    $ = cheerioHtmlFile(fs.readFileSync(htmlfile));
+    $ = fs.readFileSync(htmlfile);
     return checkHtmlContent($, checksfile);
 };
 

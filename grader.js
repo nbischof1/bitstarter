@@ -85,14 +85,12 @@ var gradeFromFile = function(prog) {
 }
 
 var gradeFromURL = function(prog) {
-    console.log('grading from URL: ' + prog.url);
     rest.get(prog.url).on('complete', function(result,response) {
 	if (result instanceof Error) {
 	    //  console.error('Error: ' + util.format(response.message));
             console.error('Error: ' + util.format(result.message));
 	    // this.retry(5000); // try again after 5 sec
 	} else {
-    console.log('reeived characters: ' + result.length);
 	    var checkJson = checkHtmlContent(result, prog.checks);
 	    doGrading(checkJson);
 	}

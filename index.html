@@ -8,7 +8,13 @@
     <link type="text/css" rel="stylesheet"  href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css">
 
     <link type="text/css" rel="stylesheet" 
+          href="http://code.jquery.com/jquery-2.0.3.js">
+    <link type="text/css" rel="stylesheet" 
           href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap-2.3.2.css">
+    <link type="text/css" rel="stylesheet" 
+          href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" 
+          href="https://raw.github.com/noizwaves/bootstrap-social-buttons/master/social-buttons.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <style type="text/css">
@@ -43,16 +49,11 @@
 
       body {
       /*
-        // padding-top: 20px;
-        // padding-bottom: 40px;
-      */
         font-family: 'Open Sans', Helvetica, Arial, sans-serif;
       }
       .heading, .subheading {
         font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-      }
-      .container {
-        width: 960px;
+        text-align: center;
       }
       p.lead {
         padding-top: 1.5%;
@@ -63,6 +64,7 @@
         font-size: 18px;
         line-height: 24px;
       }
+      /* video, pitch and action */
       .pitch {
         padding: 2.5% 0%;
       }
@@ -70,8 +72,8 @@
         padding: 2% 0%;
       }
       .actions {
-        padding: 3% 0%;
         background-color: #343434;
+        padding: 3% 0%;
       }
       .video, .thermometer, .order, .social, .statistics {
         text-align: center;
@@ -80,7 +82,26 @@
         color: white;
       }
 
-
+      /* marketing copy and footer */
+      .copy {
+        padding-top: 2.5% 2.5%;
+        padding-bottom: 2.5% 2.5%;
+        text-align: justify;
+      }
+      .asset {
+        padding: 2.5% 0%;
+      }
+      .footer {
+        color: #cccccc;
+        text-align: center;
+      }
+      .footer p {
+        font-size: 11px;
+      }
+      .footer a {
+        color: #ccccff;
+      }
+      
 
     </style>
   </head>
@@ -156,35 +177,120 @@
 
 
 
-        <div class="span6">
-          <div class="thermometer">
-            Thermometer
+        <div class="span10 offset1">
+          <!-- Thermometer -->
+          <div class="thermometer progress">
+	    <div class="bar bar-success" style="width: 35%;"></div>
+	    <div class="bar bar-warning" style="width: 20%;"></div>
+	    <div class="bar bar-danger" style="width: 10%;"></div>
           </div>
-          <div class="order">
-            Order
+
+          <div class="span6 offset3 order">
+            <!-- Order -->
+	    <button class="btn btn-success btn-large">Preorder</button>
           </div>
-          <div class="social">
-            Social
+
+          <div class="span8 offset2 social">
+            <!-- Social -->
+	      <button class="btn btn-twitter"><i class="icon-twitter"></i> | Connect with Twitter</button>
+	      <button class="btn btn-facebook"><i class="icon-facebook"></i> | Connect with Facebook</button>
           </div>
+
         </div>
       </div>
+
+
       <div class="row-fluid section1">
-        <div class="span12 marketingsection1">
-          Marketing Section 1
-        </div>
+
+          <!-- Marketing Section 1 -->
+          <div class="span5 offset1 asset">
+	    <img class="img-polaroid" src="http://placehold.it/480x300">
+          </div>
+	  <div class="span5 copy">
+	    <p>
+	      Pellentesque feugiat nisl lacus. Morbi eget congue ipsum,
+	      ac gravida nibh. Vestibulum in quam at nunc scelerisque
+	      malesuada. Vestibulum molestie magna tortor, vel rutrum
+	      odio ultricies in. Suspendisse euismod tempus felis,
+	      et ornare sem viverra non. Pellentesque habitant morbi
+	      tristique senectus et netus et malesuada fames ac turpis
+	      egestas. Mauris nec ipsum vel ante eleifend accumsan
+	      non eu odio. Nam pretium urna eu ligula vestibulum
+	      hendrerit. Morbi at urna augue. Etiam consectetur pulvinar
+	      est in suscipit. Fusce convallis nisl felis, nec viverra
+	      turpis condimentum eget. Donec rutrum diam quis ante
+	      porttitor cursus. Vestibulum elementum, lorem at rhoncus
+	      aliquet, purus orci semper urna, non placerat tortor nisl
+	      sit amet sapien. Pellentesque habitant morbi tristique
+	      senectus et netus et malesuada fames ac turpis egestas.
+	    </p>
+	  </div>
       </div>
+
       <div class="row-fluid section2">
-        <div class="span12 marketingsection2">
-          Marketing Section 2
+        <div class="span5 offset1 copy copy-right">
+          <!-- Marketing Section 2 -->
+	  <p>
+	    Maecenas facilisis malesuada tristique. Nullam molestie sem justo,
+	    sit amet iaculis mi pellentesque sit amet. Suspendisse eget fermentum
+	    nibh. Phasellus suscipit diam urna, quis consequat odio egestas nec. Duis
+	    id lectus dapibus, commodo ligula vitae, laoreet odio. Sed purus eros,
+	    lacinia nec condimentum eu, rutrum non quam. Nam ut blandit odio,
+	    sit amet mattis metus. Aenean auctor diam libero, sed consequat lacus
+	    sodales id. Integer luctus ante nibh, ut semper odio tristique id. Vivamus
+	    et auctor nibh. Quisque vitae lorem ipsum. Proin rhoncus sit amet dui
+	    placerat ornare. Nulla ut sapien sodales, cursus nulla quis, commodo
+	    arcu. Sed est nisi, mattis at varius quis, pellentesque sed lacus.
+
+        </div>
+        <div class="span5 offset1 asset">
+	  <img class="img-polaroid" src="http://placehold.it/480x300">
         </div>
       </div>
+
       <div class="row-fluid faq">
         <div class="span12 faq">
-          FAQ
+          <h3>FAQ</h3>
+
+
+	  <div class="accordion" id="accordion2">
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+		  What does FAQ stand for?
+		</a>
+	      </div>
+	      <div id="collapseOne" class="accordion-body collapse in">
+		<div class="accordion-inner">
+		  Freuquently Asked Questions.
+		</div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		  What is a Freuquently Asked Question.
+		</a>
+	      </div>
+	      <div id="collapseTwo" class="accordion-body collapse">
+		<div class="accordion-inner">
+		  A question which is commonly asked by users.
+		</div>
+	      </div>
+	    </div>
+	  </div>
+
         </div>
       </div>
+
+
+
+
       <div class="row-fluid footer">
-        <div class="span12 footer">
+        <div class="span12">
+	  <p>This work is licensed under
+	    <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC By-SA 3.0</a>.
+	  </p>
           Footer
         </div>
       </div>
